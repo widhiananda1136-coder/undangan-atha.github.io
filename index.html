@@ -1,1 +1,155 @@
-<p>Hello World</p>
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Undangan Tasyakuran Khitanan - Elzio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Poppins:wght@300;400;500;600&family=Sacramento&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="locked">
+
+  <!-- Audio Background -->
+  <audio id="bgm" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Cover Undangan -->
+  <div class="cover" id="cover">
+    <div class="cover-content">
+      <p class="cover-sub">TASYAKURAN</p>
+      <div class="frame-photo-premium">
+        <img src="foto-elzio.jpg" alt="Elzio">
+      </div>
+      <h1 class="glow-text">Elzio</h1>
+      <p class="cover-desc">Tasyakuran Khitanan</p>
+      <div class="guest-info">
+        <p>Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+        <h2 id="guestName">Tamu Undangan</h2>
+      </div>
+      <button class="btn-open" id="openBtn">
+        <span class="icon">✉</span> Buka Undangan
+      </button>
+    </div>
+  </div>
+
+  <!-- Isi Undangan -->
+  <main class="invitation-wrapper">
+    
+    <section class="section">
+      <div class="decor-top">✦ ✦ ✦</div>
+      <p class="bismillah">Bismillahhirrahmannirrahim</p>
+      <p class="ayat-text">
+        "Maka bagi setiap umat telah Kami syariatkan penyembelihan (kurban), agar mereka menyebut nama Allah atas rezeki yang dikaruniakan-Nya kepada mereka berupa hewan ternak. Maka Tuhanmu ialah Tuhan Yang Maha Esa, karena itu berserah dirilah kamu kepada-Nya..."
+        <br><span class="ayat-source">(QS. Al-Hajj: 34)</span>
+      </p>
+    </section>
+
+    <section class="section">
+      <p class="intro-text">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
+      <p class="intro-desc">
+        Dengan memohon rahmat, hidayah, serta rida Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri dan memberikan doa restu pada acara tasyakuran khitanan putra kami tercinta:
+      </p>
+      
+      <div class="profile-box">
+        <h2 class="name-title highlight">Arshaka Elzio Alvarizki</h2>
+        <div class="parents-box">
+          <p class="parent-title">Putra dari Pasangan Bahagia:</p>
+          <strong class="parent-names">Bapak Megi Setiawan & Ibu Riandini Rahayu S.Pd</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="glass-card layout-premium">
+        <h3 class="gold-title">Pelaksanaan Acara</h3>
+        <div class="decor-line"></div>
+        
+        <div class="event-details">
+          <div class="event-item">
+            <div class="event-icon">📅</div>
+            <strong>Rabu, 03 Juni 2026</strong>
+            <p>Pukul 09.00 WIB - Selesai</p>
+          </div>
+          
+          <div class="decor-line-short"></div>
+          
+          <div class="event-item">
+            <div class="event-icon">📍</div>
+            <strong>Lokasi Acara</strong>
+            <p class="location-text">Kp.Toblong, RT.01/RW.02,Desa Neglasari, Kec.Majalaya, Kabupaten Bandung, Jawa Barat</p>
+          </div>
+          
+          <a href="https://goo.gl/maps/CNdw3jUsL2brG6je6" target="_blank" class="btn-action">
+            🗺 Buka Rute Google Maps
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h3 class="gold-title">Galeri Elzio</h3>
+      <div class="decor-line"></div>
+      <p class="gallery-desc">Momen Kebahagiaan Sang Buah Hati Tercinta.</p>
+      <div class="gallery-masonry">
+        <div class="gallery-item large">
+          <img src="foto-elzio.jpg" alt="Elzio 1">
+        </div>
+        <div class="gallery-item">
+          <img src="foto-elzio2.jpg" alt="Elzio 2">
+        </div>
+        <div class="gallery-item">
+          <img src="foto-elzio3.jpg" alt="Elzio 3">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="glass-card digital-gift">
+        <h3 class="gold-title">Berbagi Kasih</h3>
+        <div class="decor-line"></div>
+        <p class="gift-desc">Bagi kerabat yang ingin memberikan tanda kasih untuk ananda Elzio, dapat melalui jalur digital di bawah ini:</p>
+        
+        <div class="bank-card-premium">
+          <div class="bank-info-row">
+            <span class="bank-name-label">BANK MANDIRI</span>
+            <div class="chip-card"></div>
+          </div>
+          <p class="rekening" id="rekNo">1300022217437</p>
+          <p class="holder">Atas Nama: RIANDINI RAHAYU</p>
+          <button class="btn-copy-premium" id="copyBtn">📋 Salin Nomor Rekening</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="glass-card">
+        <h3 class="gold-title">Untaian Doa & Ucapan</h3>
+        <div class="decor-line"></div>
+        <div class="form-guest">
+          <input type="text" id="nameInput" placeholder="Masukkan Nama Anda">
+          <textarea id="msgInput" rows="4" placeholder="Tuliskan doa terbaik untuk kesembuhan, kecerdasan, dan masa depan Elzio..."></textarea>
+          <button class="btn-send-premium" id="sendBtn">✨ Kirim Ucapan Doa</button>
+        </div>
+        <div id="commentsList" class="comment-container"></div>
+      </div>
+    </section>
+
+    <section class="section footer-section">
+      <p class="closing-text">
+        Tiada untaian kata yang lebih indah selain ucapan terima kasih atas kehadiran serta limpahan doa restu yang tulus dari Bapak/Ibu/Saudara/i sekalian.
+      </p>
+      <h3 class="thanks-text">Terima Kasih</h3>
+      <div class="family-signature">
+        <p>Kami yang berbahagia,</p>
+        <strong>Keluarga Besar Bpk. Megi Setiawan & Ibu Riandini Rahayu S.Pd</strong>
+      </div>
+    </section>
+    
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
