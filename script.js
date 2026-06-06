@@ -1,58 +1,72 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // --- KODE BUKA UNDANGAN & SALIN REKENING (TETAP SAMA) ---
   const cover = document.getElementById("cover");
   const openBtn = document.getElementById("openBtn");
   const bgm = document.getElementById("bgm");
   const body = document.body;
 
-  // 1. Fungsi Buka Undangan & Play Audio
   openBtn.addEventListener("click", () => {
-    // Animasi sampul naik ke atas
     cover.style.top = "-100vh";
     cover.style.opacity = "0";
-    
-    // Buka kunci scroll
     body.classList.remove("locked");
-
-    // Play musik background
-    // (Sebaiknya pastikan file mp3 sudah diclear noise dan di-normalize agar suaranya halus saat auto-play)
     if (bgm) {
-      bgm.volume = 0.6; // Mengatur volume di 60% agar tidak mengagetkan
-      bgm.play().catch((err) => {
-        console.log("Browser memblokir autoplay audio:", err);
-      });
+      bgm.volume = 0.6;
+      bgm.play().catch((err) => console.log("Audio autoplay diblokir:", err));
     }
-
-    // Hapus elemen cover dari DOM setelah animasi selesai
-    setTimeout(() => {
-      cover.style.display = "none";
-    }, 1000);
+    setTimeout(() => { cover.style.display = "none"; }, 1000);
   });
 
-  // 2. Fungsi Salin Nomor Rekening
   const copyBtn = document.getElementById("copyBtn");
   const rekNo = document.getElementById("rekNo").innerText;
-
   copyBtn.addEventListener("click", () => {
     navigator.clipboard.writeText(rekNo).then(() => {
       const originalText = copyBtn.innerHTML;
       copyBtn.innerHTML = "✅ Berhasil Disalin!";
-      copyBtn.style.background = "rgba(46, 204, 113, 0.4)"; // Ubah warna jadi hijau sementara
-      
+      copyBtn.style.background = "rgba(255, 255, 255, 0.4)"; 
       setTimeout(() => {
         copyBtn.innerHTML = originalText;
-        copyBtn.style.background = "rgba(255,255,255,0.2)";
+        copyBtn.style.background = "rgba(255,255,255,0.15)";
       }, 2500);
-    }).catch(err => {
-      console.error('Gagal menyalin teks: ', err);
     });
   });
 
-  // 3. Fungsi Simulasi Kirim Ucapan
+  // --- KODE BARU: INTEGRASI GOOGLE SHEETS ---
+
+  // GANTI URL DI BAWAH INI DENGAN URL APLIKASI WEB DARI TAHAP 1
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzPBbD7tlCgi7MMpo29jwkOob0ubgjnneyL9Z2ExpvmUJc8GqMCs0pINxuyhm4PxzgV/exec'; 
+  
   const sendBtn = document.getElementById("sendBtn");
   const nameInput = document.getElementById("nameInput");
   const msgInput = document.getElementById("msgInput");
   const commentsList = document.getElementById("commentsList");
 
+  // Fungsi untuk merender komentar ke HTML
+  const renderComments = (data) => {
+    commentsList.innerHTML = ""; // Bersihkan list
+    // Dibalik agar komentar terbaru ada di atas
+    data.reverse().forEach(item => {
+      const commentDiv = document.createElement("div");
+      commentDiv.classList.add("comment-item");
+      
+      const strong = document.createElement("strong");
+      strong.innerText = item.nama;
+      
+      const p = document.createElement("p");
+      p.innerText = item.ucapan;
+      
+      commentDiv.appendChild(strong);
+      commentDiv.appendChild(p);
+      commentsList.appendChild(commentDiv);
+    });
+  };
+
+  // 1. Ambil data saat web pertama kali dibuka
+  fetch(scriptURL)
+    .then(response => response.json())
+    .then(data => renderComments(data))
+    .catch(error => console.error('Gagal memuat ucapan:', error));
+
+  // 2. Kirim data saat tombol ditekan
   sendBtn.addEventListener("click", () => {
     const name = nameInput.value.trim();
     const msg = msgInput.value.trim();
@@ -62,28 +76,46 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Membuat elemen div baru untuk komentar
-    const commentDiv = document.createElement("div");
-    commentDiv.classList.add("comment-item");
-    
-    // Keamanan sederhana mencegah cross-site scripting (XSS)
-    const safeName = document.createTextNode(name);
-    const safeMsg = document.createTextNode(msg);
+    // Ubah teks tombol untuk loading
+    const originalBtnText = sendBtn.innerHTML;
+    sendBtn.innerHTML = "⏳ Sedang mengirim...";
+    sendBtn.disabled = true;
 
-    const strong = document.createElement("strong");
-    strong.appendChild(safeName);
-    
-    const p = document.createElement("p");
-    p.appendChild(safeMsg);
+    // Siapkan data untuk dikirim ke Google Sheets
+    const formData = new FormData();
+    formData.append('nama', name);
+    formData.append('ucapan', msg);
 
-    commentDiv.appendChild(strong);
-    commentDiv.appendChild(p);
+    fetch(scriptURL, { method: 'POST', body: formData })
+      .then(response => response.json())
+      .then(result => {
+        if (result.status === "success") {
+          // Tambahkan komentar ke UI secara langsung (tanpa harus memuat ulang web)
+          const commentDiv = document.createElement("div");
+          commentDiv.classList.add("comment-item");
+          
+          const strong = document.createElement("strong");
+          strong.innerText = name;
+          const p = document.createElement("p");
+          p.innerText = msg;
+          
+          commentDiv.appendChild(strong);
+          commentDiv.appendChild(p);
+          commentsList.prepend(commentDiv); // Taruh di paling atas
 
-    // Tambahkan komentar ke urutan paling atas
-    commentsList.prepend(commentDiv);
-
-    // Kosongkan form setelah mengirim
-    nameInput.value = "";
-    msgInput.value = "";
+          // Bersihkan form
+          nameInput.value = "";
+          msgInput.value = "";
+        }
+      })
+      .catch(error => {
+        alert("Maaf, terjadi kesalahan saat mengirim ucapan.");
+        console.error('Error!', error.message);
+      })
+      .finally(() => {
+        // Kembalikan tombol seperti semula
+        sendBtn.innerHTML = originalBtnText;
+        sendBtn.disabled = false;
+      });
   });
 });
