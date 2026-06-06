@@ -1,0 +1,259 @@
+/* --- ROOT & RESET --- */
+:root {
+  --bg-color: #e5e5e5;
+  --primary-dark: #0A1D16; /* Emerald Green Dark */
+  --primary-light: #163B2D;
+  --gold: #D4AF37;
+  --gold-light: #F3E5AB;
+  --text-light: #F8F9FA;
+  --text-muted: #B0B0B0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-light);
+}
+
+/* Kunci scroll sebelum tombol "Buka" ditekan */
+body.locked {
+  overflow: hidden;
+}
+
+/* --- LAYOUT UTAMA --- */
+.invitation-wrapper, .cover {
+  max-width: 480px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+  position: relative;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.invitation-wrapper {
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
+/* --- COVER OVERLAY --- */
+.cover {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: top 1s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.8s ease;
+}
+
+.cover-content {
+  padding: 30px;
+  animation: fadeIn 1.5s ease;
+}
+
+.cover-sub {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.frame-photo-premium {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  padding: 5px;
+  background: linear-gradient(45deg, var(--gold), transparent, var(--gold));
+  animation: spinBorder 6s linear infinite;
+}
+
+.frame-photo-premium img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-dark);
+}
+
+.glow-text {
+  font-family: 'Sacramento', cursive;
+  font-size: 56px;
+  color: var(--gold-light);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  margin-bottom: 5px;
+}
+
+.guest-info {
+  margin: 30px 0;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.guest-info p { font-size: 12px; color: var(--text-muted); }
+.guest-info h2 { font-size: 18px; margin-top: 5px; color: var(--gold); }
+
+.btn-open {
+  background: linear-gradient(45deg, var(--gold), #b8952a);
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+  transition: transform 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.btn-open:hover { transform: scale(1.05); }
+
+/* --- SECTIONS & TYPOGRAPHY --- */
+.section {
+  padding: 40px 25px;
+  text-align: center;
+}
+
+.decor-top { color: var(--gold); margin-bottom: 15px; letter-spacing: 5px; }
+.bismillah { font-size: 22px; font-family: 'Sacramento', cursive; color: var(--gold); margin-bottom: 15px; }
+.ayat-text { font-size: 12px; font-style: italic; line-height: 1.6; color: var(--text-muted); }
+.ayat-source { font-weight: 600; color: var(--gold); }
+
+.intro-text { font-family: 'Cinzel', serif; font-size: 16px; margin-bottom: 15px; color: var(--gold); }
+.intro-desc { font-size: 13px; line-height: 1.6; margin-bottom: 25px; }
+
+.name-title.highlight { font-family: 'Sacramento', cursive; font-size: 42px; color: var(--gold-light); margin: 20px 0; }
+.parent-title { font-size: 12px; color: var(--text-muted); }
+.parent-names { font-size: 14px; color: var(--gold); display: block; margin-top: 5px; }
+
+.gold-title { font-family: 'Cinzel', serif; font-size: 20px; color: var(--gold); margin-bottom: 10px; }
+.decor-line { width: 60px; height: 2px; background: var(--gold); margin: 0 auto 20px; }
+.decor-line-short { width: 30px; height: 1px; background: rgba(212, 175, 55, 0.3); margin: 15px auto; }
+
+/* --- GLASSMORPHISM CARDS --- */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 20px;
+  padding: 30px 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* --- EVENT DETAILS --- */
+.event-item { margin-bottom: 15px; }
+.event-icon { font-size: 24px; margin-bottom: 5px; }
+.event-item strong { display: block; font-size: 16px; color: var(--gold-light); }
+.event-item p { font-size: 13px; color: var(--text-muted); margin-top: 5px; }
+.location-text { font-size: 12px !important; line-height: 1.5; }
+
+.btn-action {
+  display: inline-block;
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 13px;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+.btn-action:hover { background: var(--gold); color: var(--primary-dark); }
+
+/* --- GALERI MASONRY --- */
+.gallery-desc { font-size: 13px; margin-bottom: 20px; color: var(--text-muted); }
+.gallery-masonry { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.gallery-item { overflow: hidden; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+.gallery-item:hover img { transform: scale(1.1); }
+.gallery-item.large { grid-column: span 2; height: 200px; }
+
+/* --- BANK CARD --- */
+.bank-card-premium {
+  background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  margin-top: 20px;
+}
+.bank-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.bank-name-label { font-family: 'Cinzel', serif; font-weight: bold; font-size: 16px; color: white; letter-spacing: 1px; }
+.chip-card { width: 35px; height: 25px; background: #FFD700; border-radius: 4px; opacity: 0.8; }
+.rekening { font-size: 22px; font-weight: bold; letter-spacing: 2px; color: white; margin-bottom: 5px; }
+.holder { font-size: 12px; color: #ddd; text-transform: uppercase; margin-bottom: 15px; }
+
+.btn-copy-premium {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-copy-premium:hover { background: rgba(255,255,255,0.4); }
+
+/* --- FORM UCAPAN --- */
+.form-guest input, .form-guest textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+.form-guest input::placeholder, .form-guest textarea::placeholder { color: #888; }
+.btn-send-premium {
+  width: 100%;
+  background: var(--gold);
+  color: var(--primary-dark);
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.comment-container { margin-top: 20px; text-align: left; max-height: 250px; overflow-y: auto; }
+.comment-item {
+  background: rgba(0,0,0,0.2);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border-left: 3px solid var(--gold);
+}
+.comment-item strong { color: var(--gold-light); font-size: 14px; }
+.comment-item p { font-size: 12px; color: #ddd; margin-top: 5px; }
+
+/* --- FOOTER --- */
+.footer-section { padding-bottom: 60px; }
+.thanks-text { font-family: 'Sacramento', cursive; font-size: 36px; color: var(--gold); margin: 20px 0; }
+.family-signature p { font-size: 12px; color: var(--text-muted); }
+.family-signature strong { font-size: 14px; color: var(--gold-light); }
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
+@keyframes spinBorder { 100% { transform: rotate(360deg); } }
