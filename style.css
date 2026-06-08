@@ -54,7 +54,7 @@ body.locked {
   text-align: center;
   background-color: #3e3126; /* Warna dasar kecokelatan untuk overlay gelap */
   /* Ganti url dengan path foto background studio Anda */
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('foto-background-studio.jpg');
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('foto-atha(upscaler).jpeg');
   background-size: cover;
   background-position: center;
   color: #ffffff;
